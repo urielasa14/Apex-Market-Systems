@@ -1,0 +1,52 @@
+# Market Operations and Trader Registry System
+
+A municipal digital system for managing market stalls and daily dues collection for traders in major Freetown markets such as Kroo Town Road and Dove Cot Market.
+
+This project was completed as the final assignment for **COMP 217 – System Analysis and Design** at Limkokwing University, Sierra Leone.
+
+## Sustainable Development Goal (SDG) Alignment
+This project supports **SDG 8: Decent Work and Economic Growth** by digitizing market operations, improving payment transparency, and helping local authorities manage informal traders more effectively.
+
+## Description
+Market records in Freetown are still managed on paper, which often leads to lost records, missed payments, and poor financial tracking. This system provides a digital solution to:
+
+- Register traders and allocate market stalls.
+- Track daily dues clearly and consistently.
+- Provide council administrators with a revenue dashboard.
+- Allow market inspectors and collectors to log payments via a mobile-friendly interface.
+
+## Team Members
+
+- Uriel Asa — Project Lead / Backend Developer [905004406]
+- Basiru Abdul Cole — Frontend Developer / UI Designer [905004276]
+- Salieu I. Kabia — Database Designer / System Analyst [905004516]
+- Abubakarr Suma — Documentation / Tester [905004500]
+- Binneh Junior Koroma — Documentation [905004527]
+- Musa Sheriff Kamara — Documentation [905004698]
+
+## Built With
+
+- Frontend: HTML, CSS, JavaScript
+- Backend: PHP
+- Database: MySQL
+- Design tools: Draw.io, Figma
+
+## Key Features
+
+- **Trader Registration:** Add traders and assign stalls digitally.
+- **Dues Collection:** Record daily payments and manage receipts.
+- **Admin Dashboard:** Display total revenue, active stalls, and trader status.
+- **Reports:** Generate payment history and outstanding balance reports.
+
+## System Analysis Artefacts
+
+The project documentation includes:
+
+- UML Use Case Diagram
+- Data Flow Diagram (DFD)
+- Entity-Relationship Diagram (ERD)
+- Interface mock-ups and mobile dashboard design
+
+## Course Project
+
+This system was developed for **COMP 217 – System Analysis and Design** at Limkokwing University, Sierra Leone.

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Market Systems</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    
+    <div class="sidebar" id="sidebar">
+        <div class="logo-container">
+            <div class="logo-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="logo-text">
+                <span class="logo-apex">APEX</span><br>
+                <span class="logo-market">MARKET</span><br>
+                <span class="logo-systems">SYSTEMS</span>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li class="active" data-page="dashboard">
+                <i class="fas fa-home"></i> Dashboard
+            </li>
+            <li data-page="registration">
+                <i class="fas fa-user-plus"></i> Trader Registration
+            </li>
+            <li data-page="payment">
+                <i class="fas fa-credit-card"></i> Payment
+            </li>
+            <li data-page="report">
+                <i class="fas fa-chart-bar"></i> Report
+            </li>
+        </ul>
+    </div>
+
+    
+    <div class="main-content">
+        
+        <div class="top-header">
+            <span class="page-title" id="pageTitle">Dashboard</span>
+            <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        </div>
+
+        
+        <div id="loading" class="loading-overlay" style="display:none;">
+            <div class="spinner"></div>
+            <p>Processing...</p>
+        </div>
+
+        
+        <div id="notification" class="notification" style="display:none;"></div>
+
+        
+        <div id="page-dashboard" class="page-view active">
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4>Total<br>Traders</h4>
+                        <h2 id="dash-total-traders">0</h2>
+                    </div>
+                    <i class="fas fa-users stat-icon"></i>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4>Total Dues<br>Collected</h4>
+                        <h2 id="dash-total-dues">$0</h2>
+                    </div>
+                    <div class="stat-icon-box"><i class="fas fa-dollar-sign"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4>Stalls<br>Occupied</h4>
+                        <h2 id="dash-stalls">0</h2>
+                    </div>
+                    <div class="stat-icon-box"><i class="fas fa-store"></i></div>
+                </div>
+            </div>
+
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" data-navigate="registration">Add Trader</button>
+                <button class="btn btn-primary" data-navigate="payment">View Payment</button>
+                <button class="btn btn-primary" data-navigate="report">Generate Report</button>
+            </div>
+
+            
+            <div class="section-header">Recent Activity</div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Trader</th>
+                            <th>Stall</th>
+                            <th>Status</th>
+                            <th>Last Payment</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activity-table">
+                        <tr><td colspan="4">Loading data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        
+        <div id="page-registration" class="page-view">
+            <h2 class="form-title">Trader Registration</h2>
+            <form id="form-registration" novalidate>
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="reg-name">Trader Name</label>
+                        <input type="text" id="reg-name" placeholder="Enter full name" required>
+                        <span class="field-error" id="err-name"></span>
+                    </div>
+                    <div class="field">
+                        <label for="reg-stall">Stall Number</label>
+                        <input type="text" id="reg-stall" placeholder="e.g. Stall 12" required>
+                        <span class="field-error" id="err-stall"></span>
+                    </div>
+                    <div class="field">
+                        <label for="reg-phone">Contact Info</label>
+                        <input type="text" id="reg-phone" placeholder="e.g. 077-123-456" required>
+                        <span class="field-error" id="err-phone"></span>
+                    </div>
+                    <div class="field">
+                        <label for="reg-status">Payment Status</label>
+                        <select id="reg-status">
+                            <option value="Pending">Pending</option>
+                            <option value="Paid">Paid</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                    <button type="reset" class="btn btn-primary"><i class="fas fa-eraser"></i> Clear</button>
+                    <button type="button" class="btn btn-primary" data-navigate="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+                </div>
+            </form>
+        </div>
+
+        
+        <div id="page-payment" class="page-view">
+            <h2 class="form-title">Payments</h2>
+            <form id="form-payment" novalidate>
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="pay-trader">Trader Name</label>
+                        <select id="pay-trader" required>
+                            <option value="">-- Select Trader --</option>
+                        </select>
+                        <span class="field-error" id="err-trader"></span>
+                    </div>
+                    <div class="field">
+                        <label for="pay-date">Payment Date</label>
+                        <input type="date" id="pay-date" required>
+                        <span class="field-error" id="err-date"></span>
+                    </div>
+                    <div class="field">
+                        <label for="pay-amount">Amount Paid</label>
+                        <div class="input-with-icon">
+                            <span class="icon-prefix">$</span>
+                            <input type="number" id="pay-amount" placeholder="0.00" min="1" step="0.01" required>
+                        </div>
+                        <span class="field-error" id="err-amount"></span>
+                    </div>
+                    <div class="field">
+                        <label for="pay-method">Payment Method</label>
+                        <select id="pay-method" required>
+                            <option value="">Select Method</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Mobile Money">Mobile Money</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                        </select>
+                        <span class="field-error" id="err-method"></span>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add</button>
+                    <button type="reset" class="btn btn-primary"><i class="fas fa-eraser"></i> Clear</button>
+                    <button type="button" class="btn btn-primary" data-navigate="dashboard"><i class="fas fa-arrow-left"></i> Back To Dashboard</button>
+                </div>
+            </form>
+
+            
+            <div class="payment-summary">
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <span>Total Dues Collected: <strong id="pay-total">$0</strong></span>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fas fa-chart-bar"></i></div>
+                    <span>Pending Payment: <strong id="pay-pending">0</strong></span>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="page-report" class="page-view">
+            
+            <div class="stats-grid grid-2">
+                <div class="report-stat-card">
+                    <i class="fas fa-user-circle fa-3x"></i>
+                    <h4>Total Traders</h4>
+                    <h2 id="rep-traders">0</h2>
+                </div>
+                <div class="report-stat-card">
+                    <i class="fas fa-money-bill-wave fa-3x"></i>
+                    <h4>Dues Collected</h4>
+                    <h2 id="rep-dues">$0</h2>
+                </div>
+            </div>
+
+            
+            <div class="form-actions" style="margin: 25px 0;">
+                <a href="api.php?action=export_csv" class="btn btn-primary" style="text-decoration:none;">
+                    <i class="fas fa-file-csv"></i> Download CSV
+                </a>
+                <a href="api.php?action=export_json" class="btn btn-primary" style="text-decoration:none;">
+                    <i class="fas fa-file-code"></i> Download JSON
+                </a>
+                <button type="button" class="btn btn-primary" data-navigate="dashboard">
+                    <i class="fas fa-arrow-left"></i> Back To Dashboard
+                </button>
+            </div>
+
+            
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h4>Payment Overviews</h4>
+                    <canvas id="barChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h4>Trader Dashboard</h4>
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
